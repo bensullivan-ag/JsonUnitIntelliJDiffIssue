@@ -16,8 +16,10 @@
 package net.javacrumbs.jsonunit.core.internal;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.NullNode;
 import net.javacrumbs.jsonunit.providers.Jackson2ObjectMapperProvider;
 
@@ -213,6 +215,9 @@ class Jackson2NodeFactory extends AbstractNodeFactory {
         private static final ObjectMapper lenientMapper = new ObjectMapper().findAndRegisterModules();
 
         static {
+            mapper.configure(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS, true);
+            mapper.setNodeFactory(JsonNodeFactory.withExactBigDecimals(true));
+
             lenientMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
             lenientMapper.configure(JsonParser.Feature.ALLOW_COMMENTS, true);
             lenientMapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);

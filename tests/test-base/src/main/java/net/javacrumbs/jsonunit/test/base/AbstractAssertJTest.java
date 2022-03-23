@@ -775,6 +775,13 @@ public abstract class AbstractAssertJTest {
             .hasMessage("Node \"a\" can not be converted to number expected: <a number> but was: <\"x\">.");
     }
 
+    @Test
+    void shouldDiffCloseNumbers() {
+        assertThatThrownBy(() ->
+            assertThatJson("{\"result\":{\"a\": 0.299999999999999988897769753748434595763683319091796875}}").isEqualTo("{result: {a: 0.3}}")
+        );
+    }
+
     // https://github.com/assertj/assertj-core/issues/2111
     @Test
     void containsValue() {
