@@ -1915,6 +1915,11 @@ public abstract class AbstractAssertJTest {
             .isEqualTo("{\"c\":3}");
     }
 
+    @Test
+    void jsonUnitShouldProvideIntelliJFailureDiff() {
+        assertThatJson("{\"foo\":1, \"bar\":2}").isEqualTo("{\"b\":3, \"a\":1}");
+    }
+
     private static final String json = "{\n" +
         "    \"store\": {\n" +
         "        \"book\": [\n" +
